@@ -22,6 +22,7 @@ body {
 
 main {
     position: relative;
+    isolation: isolate;
     min-height: 100vh;
 
     /* Flexbox */
@@ -53,6 +54,7 @@ section#telefone {
 
 iframe#tela {
     position: relative;
+    z-index: 1;
 
     top: 80px;
     left: 22px;
@@ -72,7 +74,7 @@ section#redes-sociais {
     gap: 15px;
 
     /* Fica na frente do celular */
-    z-index: 10;
+    z-index: 2;
 }
 
 section#redes-sociais img {
@@ -103,24 +105,33 @@ section#redes-sociais img:hover {
 @media (max-width: 1200px) {
 
     main {
-        flex-direction: column;
-
-        height: auto;
-        min-height: 100vh;
-
-        padding-top: 50px;
-        padding-bottom: 50px;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 12px;
+        padding: 12px;
     }
 
     section#redes-sociais {
-        flex-direction: row;
-
-        flex-wrap: wrap;
-
-        justify-content: center;
-
-        width: 100%;
-
+        flex-direction: column;
+        flex-wrap: nowrap;
+        width: 50px;
         z-index: 10;
+    }
+}
+
+@media (max-width: 420px) {
+
+    section#telefone {
+        width: calc(100vw - 86px);
+        height: auto;
+        aspect-ratio: 311 / 627;
+        background-size: 100% 100%;
+    }
+
+    iframe#tela {
+        top: 12.76%;
+        left: 7.07%;
+        width: 85.85%;
+        height: 75.12%;
     }
 }
