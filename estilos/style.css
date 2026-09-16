@@ -4,10 +4,11 @@
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
-    box-sizing: border-box; /* Ajuda no cálculo de tamanhos */
+    box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     height: 100%;
     width: 100%;
     background-color: black;
@@ -21,68 +22,105 @@ body {
 
 main {
     position: relative;
-    min-height:100vh;
-    /* Flexbox: alinha o celular e os botões lado a lado */
+    min-height: 100vh;
+
+    /* Flexbox */
     display: flex;
-    justify-content: center; /* Centraliza na horizontal */
-    align-items: center;     /* Centraliza na vertical */
-    gap: 30px;               /* Espaço entre o celular e a coluna de botões */
+    justify-content: center;
+    align-items: center;
+
+    gap: 30px;
     padding: 20px;
 }
 
+/* CELULAR */
+
 section#telefone {
-    position: relative; 
+    position: relative;
+
     height: 627px;
     width: 311px;
+
     background: url(../imagens/frame-iphone.png) no-repeat;
-    flex-shrink: 0; /* Impede que o celular seja esmagado em telas menores */
+
+    flex-shrink: 0;
+
+    /* Fica atrás dos botões */
+    z-index: 1;
 }
+
+/* TELA DO CELULAR */
 
 iframe#tela {
     position: relative;
+
     top: 80px;
     left: 22px;
+
     width: 267px;
     height: 471px;
 }
 
+/* REDES SOCIAIS */
+
 section#redes-sociais {
-    /* Coloca os botões um embaixo do outro no computador */
+    position: relative;
+
     display: flex;
-    flex-direction: column; 
-    gap: 15px; /* Espaço entre os botões */
+    flex-direction: column;
+
+    gap: 15px;
+
+    /* Fica na frente do celular */
+    z-index: 10;
 }
 
 section#redes-sociais img {
     width: 50px;
+
     border-radius: 50%;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.400); /* Corrigido para rgba */
+
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+
     display: block;
-    transition: transform .3s, border 1s; /* Suaviza a animação */
+
+    transition: transform 0.3s, border 0.3s;
 }
 
 section#redes-sociais img:hover {
     border: 2px solid white;
+
     transform: translate(-3px, -3px);
+
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.616);
 }
 
+
 /* =========================================
-   RESPONSIVIDADE (PARA CELULARES)
+   RESPONSIVIDADE
    ========================================= */
-/* Quando a tela for menor que 800px, os botões vão para baixo do celular */
-@media (max-width: 800px) {
+
+@media (max-width: 1200px) {
+
     main {
-        flex-direction: column; /* Muda a direção: celular em cima, botões embaixo */
-        height: auto; /* Permite rolar a página se não couber tudo */
+        flex-direction: column;
+
+        height: auto;
+        min-height: 100vh;
+
         padding-top: 50px;
         padding-bottom: 50px;
     }
 
     section#redes-sociais {
-        flex-direction: row; /* No celular, os botões ficam lado a lado */
-        flex-wrap: wrap;     /* Se não couberem, vão para a linha de baixo */
-        justify-content: center; /* Centraliza os botões */
+        flex-direction: row;
+
+        flex-wrap: wrap;
+
+        justify-content: center;
+
         width: 100%;
+
+        z-index: 10;
     }
 }
