@@ -1,14 +1,15 @@
-@charset "UTF-8;"
+@charset "UTF-8";
 
 * {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box; /* Ajuda no cálculo de tamanhos */
 }
 
 html, body {
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     background-color: black;
 }
 
@@ -20,45 +21,68 @@ body {
 
 main {
     position: relative;
-    height: 100vh;
+    min-height:100vh;
+    /* Flexbox: alinha o celular e os botões lado a lado */
+    display: flex;
+    justify-content: center; /* Centraliza na horizontal */
+    align-items: center;     /* Centraliza na vertical */
+    gap: 30px;               /* Espaço entre o celular e a coluna de botões */
+    padding: 20px;
 }
 
 section#telefone {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
+    position: relative; 
     height: 627px;
     width: 311px;
     background: url(../imagens/frame-iphone.png) no-repeat;
+    flex-shrink: 0; /* Impede que o celular seja esmagado em telas menores */
 }
 
- iframe#tela {
-        position: relative;
-        top: 80px;
-        left: 22px;
-        width: 267px;
-        height: 471px;
+iframe#tela {
+    position: relative;
+    top: 80px;
+    left: 22px;
+    width: 267px;
+    height: 471px;
+}
+
+section#redes-sociais {
+    /* Coloca os botões um embaixo do outro no computador */
+    display: flex;
+    flex-direction: column; 
+    gap: 15px; /* Espaço entre os botões */
+}
+
+section#redes-sociais img {
+    width: 50px;
+    border-radius: 50%;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.400); /* Corrigido para rgba */
+    display: block;
+    transition: transform .3s, border 1s; /* Suaviza a animação */
+}
+
+section#redes-sociais img:hover {
+    border: 2px solid white;
+    transform: translate(-3px, -3px);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.616);
+}
+
+/* =========================================
+   RESPONSIVIDADE (PARA CELULARES)
+   ========================================= */
+/* Quando a tela for menor que 800px, os botões vão para baixo do celular */
+@media (max-width: 800px) {
+    main {
+        flex-direction: column; /* Muda a direção: celular em cima, botões embaixo */
+        height: auto; /* Permite rolar a página se não couber tudo */
+        padding-top: 50px;
+        padding-bottom: 50px;
     }
 
     section#redes-sociais {
-        text-align: right;
-        margin-right: 15px;
+        flex-direction: row; /* No celular, os botões ficam lado a lado */
+        flex-wrap: wrap;     /* Se não couberem, vão para a linha de baixo */
+        justify-content: center; /* Centraliza os botões */
+        width: 100%;
     }
-
-    section#redes-sociais img {
-        width: 50px;
-        margin: 10px;
-        border-radius: 50%;
-        box-shadow: 2px 2px 5px rgb(0, 0, 0.400);
-        box-sizing: border-box;
-
-    }
-
-    section#redes-sociais img:hover {
-        border: 2px solid white;
-        transform: translate(-3px, -3px);
-        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.616);
-        transition: transform .3s, border 1s;
-    }
+}
